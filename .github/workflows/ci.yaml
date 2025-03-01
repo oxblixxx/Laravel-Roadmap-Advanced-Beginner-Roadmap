@@ -12,7 +12,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      FILE_PATH: "your_file_path" 
+      FILE_PATH: "Laravel-Roadmap-Advanced-Beginner-Roadmap" 
       KEY_NAME: "laravel_project" 
 
     steps:
@@ -27,7 +27,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /var/www/html/$GITHUB_REPOSITORY
+            #cd /var/www/html
+            cd /var/www/html/${{ env.FILE_PATH }}
             echo "Hello world" >> readme.test
             eval "$(ssh-agent -s)"
             ssh-add /home/oxblixxx/.ssh/${{ env.KEY_NAME }}
@@ -35,9 +36,9 @@ jobs:
             git fetch --all
             git reset --hard origin/develop
             git pull origin develop
-            git config --global --add safe.directory /var/www/html/$GITHUB_REPOSITORY
-            sudo chown -R www-data:www-data /var/www/html/$GITHUB_REPOSITORY
-            sudo chmod -R 775 /var/www/html/$GITHUB_REPOSITORY/storage /var/www/html/$GITHUB_REPOSITORY/bootstrap/cache
+            git config --global --add safe.directory /var/www/html/${{ env.FILE_PATH }}
+            sudo chown -R www-data:www-data /var/www/html/${{ env.FILE_PATH }}
+            sudo chmod -R 775 /var/www/html/${{ env.FILE_PATH }}/storage /var/www/html/${{ env.FILE_PATH }}/bootstrap/cache
 
             # Ensure environment variables are loaded
             cp .env.example .env
