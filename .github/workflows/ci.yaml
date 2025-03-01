@@ -27,14 +27,14 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /var/www/html
+            cd /var/www/html/${{ github.repository }}
+            echo "Hello world" >> readme.test
             eval "$(ssh-agent -s)"
             ssh-add /home/oxblixxx/.ssh/${{ env.KEY_NAME }}
-            git clone git@github.com:oxblixxx/Laravel-Roadmap-Advanced-Beginner-Roadmap.git                                           \
-            #git fetch --all
+            #git clone git@github.com:oxblixxx/Laravel-Roadmap-Advanced-Beginner-Roadmap.git                                           \
+            git fetch --all
             git reset --hard origin/develop
             git pull origin develop
-            cd /var/www/html/
             git config --global --add safe.directory /var/www/html/$GITHUB_REPOSITORY
             sudo chown -R www-data:www-data /var/www/html/$GITHUB_REPOSITORY
             sudo chmod -R 775 /var/www/html/$GITHUB_REPOSITORY/storage /var/www/html/$GITHUB_REPOSITORY/bootstrap/cache
