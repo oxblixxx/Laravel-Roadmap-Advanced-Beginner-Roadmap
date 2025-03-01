@@ -31,7 +31,7 @@ jobs:
             eval "$(ssh-agent -s)"
             ssh-add /home/oxblixxx/.ssh/${{ env.KEY_NAME }}
             git clone git@github.com:oxblixxx/Laravel-Roadmap-Advanced-Beginner-Roadmap.git                                           \
-            git fetch --all
+            #git fetch --all
             git reset --hard origin/develop
             git pull origin develop
 
