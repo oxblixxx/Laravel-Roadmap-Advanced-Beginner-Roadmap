@@ -30,10 +30,9 @@ jobs:
             cd /home/oxblixxx
             echo "hello world" >> readme.md
             cd /var/www/html
-            echo "hello world" >> readme.md
             eval "$(ssh-agent -s)"
-            ssh-add ~/.ssh/${{ env.KEY_NAME }}
-            git clone git@github.com:${{ github.repository }}.git                                               \
+            ssh-add /home/oxblixxx/.ssh/${{ env.KEY_NAME }}
+            git clone git@github.com:oxblixxx/Laravel-Roadmap-Advanced-Beginner-Roadmap.git                                           \
             git fetch --all
             git reset --hard origin/develop
             git pull origin develop
