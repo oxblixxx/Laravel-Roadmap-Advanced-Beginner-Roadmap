@@ -27,7 +27,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /var/www/html/${{ github.repository }}
+            cd /var/www/html/$GITHUB_REPOSITORY
             echo "Hello world" >> readme.test
             eval "$(ssh-agent -s)"
             ssh-add /home/oxblixxx/.ssh/${{ env.KEY_NAME }}
